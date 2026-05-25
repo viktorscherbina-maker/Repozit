@@ -14,4 +14,15 @@ This is an empty test repository ("Тестовый репозиторий") con
 
 - PHP was installed via `apt` (`php php-cli php-common php-mbstring php-xml php-curl php-zip`). If the VM is recreated, the update script reinstalls it.
 - Composer was installed globally to `/usr/local/bin/composer`.
-- **No lint, test, or build commands** exist yet. When code is added, update this section accordingly.
+### Commands
+
+| Action | Command |
+|---|---|
+| Dev server | `composer dev` (runs `php -S localhost:8000 -t public`) |
+| Tests | `composer test` (PHPUnit) |
+| Lint check | `composer lint` (PHP CS Fixer, dry-run) |
+| Lint fix | `composer lint:fix` |
+| Install deps | `composer install` |
+
+- Data is stored in `data/tasks.json` (gitignored). Delete this file to reset state.
+- The dev server serves from `public/index.php`.
