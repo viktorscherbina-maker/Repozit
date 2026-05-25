@@ -239,7 +239,11 @@ if ($submitted) {
             margin-top: 0.15rem;
         }
 
-        button {
+        button,
+        .secondary-action {
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
             border: 0;
             border-radius: 1rem;
             padding: 1rem 1.2rem;
@@ -247,12 +251,14 @@ if ($submitted) {
             background: linear-gradient(135deg, var(--brand), var(--brand-dark));
             font: inherit;
             font-weight: 800;
+            text-decoration: none;
             cursor: pointer;
             box-shadow: 0 0.9rem 1.8rem rgba(50, 100, 255, 0.25);
             transition: transform 0.2s ease, box-shadow 0.2s ease;
         }
 
-        button:hover {
+        button:hover,
+        .secondary-action:hover {
             transform: translateY(-2px);
             box-shadow: 0 1.1rem 2rem rgba(50, 100, 255, 0.3);
         }
@@ -311,50 +317,54 @@ if ($submitted) {
                 </div>
             <?php endif; ?>
 
-            <form method="post" action="">
-                <div class="grid">
-                    <label>
-                        Имя и фамилия
-                        <input type="text" name="name" placeholder="Анна Иванова" value="<?= $application['name']; ?>" required>
+            <?php if (!$submitted || $errors): ?>
+                <form method="post" action="">
+                    <div class="grid">
+                        <label>
+                            Имя и фамилия
+                            <input type="text" name="name" placeholder="Анна Иванова" value="<?= $application['name']; ?>" required>
+                        </label>
+
+                        <label>
+                            Email
+                            <input type="email" name="email" placeholder="anna@example.com" value="<?= $application['email']; ?>" required>
+                        </label>
+
+                        <label>
+                            Телефон
+                            <input type="tel" name="phone" placeholder="+7 900 000-00-00" value="<?= $application['phone']; ?>" required>
+                        </label>
+
+                        <label>
+                            Организация
+                            <input type="text" name="company" placeholder="ООО «Пример»" value="<?= $application['company']; ?>">
+                        </label>
+
+                        <label class="full">
+                            Тип регистрации
+                            <select name="role">
+                                <option value="client" <?= $application['role'] === 'client' ? 'selected' : ''; ?>>Клиент</option>
+                                <option value="partner" <?= $application['role'] === 'partner' ? 'selected' : ''; ?>>Партнер</option>
+                                <option value="employee" <?= $application['role'] === 'employee' ? 'selected' : ''; ?>>Сотрудник</option>
+                            </select>
+                        </label>
+
+                        <label class="full">
+                            Комментарий
+                            <textarea name="comment" placeholder="Расскажите, какой доступ нужно подготовить"><?= $application['comment']; ?></textarea>
+                        </label>
+                    </div>
+
+                    <label class="consent">
+                        <input type="checkbox" name="consent" required>
+                        <span>Я согласен на обработку персональных данных для рассмотрения заявки.</span>
                     </label>
 
-                    <label>
-                        Email
-                        <input type="email" name="email" placeholder="anna@example.com" value="<?= $application['email']; ?>" required>
-                    </label>
-
-                    <label>
-                        Телефон
-                        <input type="tel" name="phone" placeholder="+7 900 000-00-00" value="<?= $application['phone']; ?>" required>
-                    </label>
-
-                    <label>
-                        Организация
-                        <input type="text" name="company" placeholder="ООО «Пример»" value="<?= $application['company']; ?>">
-                    </label>
-
-                    <label class="full">
-                        Тип регистрации
-                        <select name="role">
-                            <option value="client" <?= $application['role'] === 'client' ? 'selected' : ''; ?>>Клиент</option>
-                            <option value="partner" <?= $application['role'] === 'partner' ? 'selected' : ''; ?>>Партнер</option>
-                            <option value="employee" <?= $application['role'] === 'employee' ? 'selected' : ''; ?>>Сотрудник</option>
-                        </select>
-                    </label>
-
-                    <label class="full">
-                        Комментарий
-                        <textarea name="comment" placeholder="Расскажите, какой доступ нужно подготовить"><?= $application['comment']; ?></textarea>
-                    </label>
-                </div>
-
-                <label class="consent">
-                    <input type="checkbox" name="consent" required>
-                    <span>Я согласен на обработку персональных данных для рассмотрения заявки.</span>
-                </label>
-
-                <button type="submit">Отправить заявку</button>
-            </form>
+                    <button type="submit">Отправить заявку</button>
+                </form>
+            <?php else: ?>
+                <a class="secondary-action" href="/">Отправить новую заявку</a>
+            <?php endif; ?>
         </section>
     </main>
 </body>
