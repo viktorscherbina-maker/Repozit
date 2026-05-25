@@ -234,9 +234,16 @@ if ($submitted) {
             font-weight: 400;
         }
 
-        .consent input {
-            width: auto;
-            margin-top: 0.15rem;
+        .consent input[type="checkbox"] {
+            flex: 0 0 1rem;
+            width: 1rem;
+            height: 1rem;
+            margin: 0.15rem 0 0;
+            padding: 0;
+        }
+
+        .consent span {
+            line-height: 1.45;
         }
 
         button,
